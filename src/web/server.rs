@@ -1,5 +1,9 @@
 use axum::Router;
-use std::net::SocketAddr;
+use std::{
+    collections::HashMap,
+    net::SocketAddr,
+    sync::{Arc, RwLock},
+};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 use crate::web::service;
@@ -13,8 +17,10 @@ pub async fn start() {
         )
         .with(tracing_subscriber::fmt::layer())
         .init();
-
-    let app = Router::new().merge(service::image::register());
+    let state = Arc::new(RwLock::new(AppState::new()));
+    let app = Router::new()
+        .nest("/", service::image::register())
+        .with_state(state);
 
     let addr: SocketAddr = "127.0.0.1:4396".parse().unwrap();
     tracing::debug!("listening on {}", addr);
@@ -22,4 +28,25 @@ pub async fn start() {
         .serve(app.into_make_service())
         .await
         .unwrap();
+}
+
+pub type SharedState = Arc<RwLock<AppState>>;
+
+#[derive(Clone)]
+pub struct AppState {
+    // store: KV,
+    // pub name: String,
+    // pub ss: MemoryStore,
+    pub db: HashMap<String, String>,
+}
+
+impl AppState {
+    pub fn new() -> Self {
+        // Self {
+        //     name: String::from("xx"),
+        //     ss: MemoryStore::new(),
+        // }
+        // Self { store: KV::new() }
+        Self { db: HashMap::new() }
+    }
 }
