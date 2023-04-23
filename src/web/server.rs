@@ -32,21 +32,13 @@ pub async fn start() {
 
 pub type SharedState = Arc<RwLock<AppState>>;
 
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct AppState {
-    // store: KV,
-    // pub name: String,
-    // pub ss: MemoryStore,
     pub db: HashMap<String, String>,
 }
 
 impl AppState {
     pub fn new() -> Self {
-        // Self {
-        //     name: String::from("xx"),
-        //     ss: MemoryStore::new(),
-        // }
-        // Self { store: KV::new() }
         Self { db: HashMap::new() }
     }
 }

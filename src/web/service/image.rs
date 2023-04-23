@@ -87,7 +87,8 @@ async fn get_name(
     State(state): State<SharedState>,
 ) -> Json<GetNameResponse> {
     let data = state.read().unwrap();
-    let val = data.db.get(&q.jobid).unwrap();
+    let default = String::from("");
+    let val = data.db.get(&q.jobid).unwrap_or(&default);
     let res = GetNameResponse {
         jobid: q.jobid,
         name: val.clone(),
