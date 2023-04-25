@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package cms.service.conf;
+
+import "yilan/config/v1/config.proto";
+
+option go_package = "github.com/fxkt-tech/picsal/internal/conf;conf";
+
+message Bootstrap {
+ 
+}

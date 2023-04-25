@@ -1,0 +1,17 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/fxkt-tech/picsal/api
+    except:
+      - buf.build/googleapis/googleapis
+      - buf.build/kratos/apis
+plugins:
+  - plugin: openapi
+    out: proto/api
+    opt:
+      - fq_schema_naming=true
+      - default_response=false
+
+  # - plugin: buf.build/grpc-ecosystem/openapiv2
+  #   out: api
