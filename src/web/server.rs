@@ -1,4 +1,5 @@
 use axum::Router;
+use serde_json::de;
 use std::{
     collections::HashMap,
     net::SocketAddr,
@@ -32,7 +33,6 @@ pub async fn start() {
 
 pub type SharedState = Arc<RwLock<AppState>>;
 
-#[derive(Clone, Default)]
 pub struct AppState {
     pub db: HashMap<String, String>,
 }
