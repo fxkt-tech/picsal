@@ -12,7 +12,6 @@ COLOR = "\e[1;36m%s\e[0m\n"
 .PHONY: clean
 clean: clean-api
 
-
 # *** build ***
 
 .PHONY: build
@@ -58,16 +57,8 @@ openapi:
 config:
 	@printf $(COLOR) "Codegen: [$(APP_RELATIVE_PATH)] for config"
 	@protoc --proto_path=. \
-           --proto_path=../../../third_party \
            --go_out=paths=source_relative:. \
            $(INTERNAL_PROTO_FILES)
-
-.PHONY: baseconfig
-baseconfig:
-	@printf $(COLOR) "Codegen: baseconfig"
-	@cd third_party/yilan && protoc --proto_path=. \
-		--go_out=paths=source_relative:. \
-		./config/v1/*.proto
 
 # *** tools ***
 
@@ -79,7 +70,6 @@ tools:
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
 	go install entgo.io/ent/cmd/ent@v0.11.0
 	go install github.com/bufbuild/buf/cmd/buf@v1.13.1
-	cd pkg/kratos/cmd/protoc-gen-go-ylres && go install
 
 # *** clean ***
 

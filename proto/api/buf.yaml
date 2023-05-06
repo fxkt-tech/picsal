@@ -9,20 +9,18 @@ deps:
 lint:
   ignore_only:
     ENUM_VALUE_PREFIX:
-      - errs/errs.proto
-      - mps/service/v6/mps_errs.proto
+      - ./
     ENUM_ZERO_VALUE_SUFFIX:
-      - errs/errs.proto
-      - mps/service/v6/mps_errs.proto
+      - ./
     PACKAGE_DIRECTORY_MATCH:
-      - errs/errs.proto
+      - ./
     PACKAGE_VERSION_SUFFIX:
-      - errs/errs.proto
+      - ./
     RPC_RESPONSE_STANDARD_NAME:
-      - cms/
+      - ./
     RPC_REQUEST_STANDARD_NAME:
-      - cms/
+      - ./
     RPC_REQUEST_RESPONSE_UNIQUE:
-      - cms/
+      - ./
   use:
     - DEFAULT

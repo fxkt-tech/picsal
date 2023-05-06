@@ -24,7 +24,7 @@ func initApp(bootstrap *conf.Bootstrap, logger log.Logger) (*kratos.App, func(),
 	if err != nil {
 		return nil, nil, err
 	}
-	imageRepo := data.NewAIRepo(dataData, logger)
+	imageRepo := data.NewImageRepo(dataData, logger)
 	imageUsecase := biz.NewImageUsecase(imageRepo, logger)
 	imageService := service.NewImageService(imageUsecase, logger)
 	httpServer, err := server.NewHTTPServer(bootstrap, dataData, imageService, logger)

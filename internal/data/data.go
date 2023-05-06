@@ -1,9 +1,8 @@
 package data
 
 import (
-	"os"
-
 	"github.com/fxkt-tech/picsal/internal/conf"
+	"github.com/fxkt-tech/picsal/pkg/image"
 	"github.com/go-kratos/kratos/v2/log"
 
 	// _ "github.com/go-sql-driver/mysql"
@@ -13,19 +12,21 @@ import (
 var ProviderSet = wire.NewSet(
 	NewData,
 
-	NewAIRepo,
+	NewImageRepo,
 )
 
 type Data struct {
-	debug bool
+	// debug bool
+	imgStore *image.Storage
 }
 
 func NewData(c *conf.Bootstrap, logger log.Logger) (*Data, func(), error) {
 	// debug
-	debug := os.Getenv("YILAN_LOG_LEVEL") == "DEBUG"
+	// debug := os.Getenv("YILAN_LOG_LEVEL") == "DEBUG"
 
 	return &Data{
-			debug: debug,
+			// debug: debug,
+			imgStore: image.NewStorage(),
 		}, func() {
 			log.NewHelper(logger).Warn("closing the data resources")
 		}, nil

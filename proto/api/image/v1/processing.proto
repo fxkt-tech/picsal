@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package image.v1;
+
+import "google/api/annotations.proto";
+
+service ProcessingService {
+  // 新建一个图片任务
+  rpc CreateJob(CreateJobRequest) returns (CreateJobResponse) {
+    option (google.api.http) = {get: "/v1/proc/create"};
+  }
+  // 图片裁剪
+  rpc Clip(ClipRequest) returns (ImageStreamResponse) {
+    option (google.api.http) = {get: "/v1/proc/filter/clip"};
+  }
+  // 图片反转
+  // 图片缩放
+  rpc Scale(ScaleRequest) returns (ImageStreamResponse) {
+    option (google.api.http) = {get: "/v1/proc/filter/scale"};
+  }
+}
+
+message ImageStreamResponse {
+  bytes image_stream = 1;
+  string content_type = 2;
+}
+
+// ---
+
+message CreateJobRequest {
+  string f = 1;
+}
+message CreateJobResponse {
+  string id = 1;
+}
+
+message ClipRequest {
+  string id = 1;
+  int32 w = 2;
+  int32 h = 3;
+  int32 x = 4;
+  int32 y = 5;
+}
+
+message ScaleRequest {
+  string id = 1;
+  int32 w = 2;
+  int32 h = 3;
+}
+

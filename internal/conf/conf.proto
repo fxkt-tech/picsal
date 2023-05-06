@@ -1,11 +1,21 @@
 syntax = "proto3";
 
-package cms.service.conf;
-
-import "yilan/config/v1/config.proto";
+package picsal.conf;
 
 option go_package = "github.com/fxkt-tech/picsal/internal/conf;conf";
 
 message Bootstrap {
- 
+  HTTP http_server = 1;
+  Database db = 2;
+}
+
+message HTTP {
+  string network = 1;
+  string addr = 2;
+  int64 timeout = 3;
+}
+
+message Database {
+  string driver = 1;
+  string source = 2;
 }
