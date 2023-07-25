@@ -56,3 +56,23 @@ func (s *ImageService) Scale(ctx context.Context, in *v1.ScaleRequest) (*v1.Imag
 		ContentType: "image/jpeg",
 	}, nil
 }
+
+func (s *ImageService) Clip(ctx context.Context, in *v1.ClipRequest) (*v1.ImageStreamResponse, error) {
+	s.log.Infow("Clip.req: %s", in)
+
+	result, err := s.img.Clip(ctx, &biz.ClipParams{
+		Jobid:   in.Id,
+		Width:   in.W,
+		Height:  in.H,
+		XOffset: in.X,
+		YOffset: in.Y,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return &v1.ImageStreamResponse{
+		ImageStream: result.ImageBytes,
+		ContentType: "image/jpeg",
+	}, nil
+}

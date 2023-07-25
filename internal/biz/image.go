@@ -9,6 +9,7 @@ import (
 type ImageRepo interface {
 	CreateJob(ctx context.Context, p *CreateJobParams) (*CreateJobResult, error)
 	Scale(ctx context.Context, p *ScaleParams) (*ImageResult, error)
+	Clip(ctx context.Context, p *ClipParams) (*ImageResult, error)
 }
 
 type ImageUsecase struct {
@@ -26,4 +27,8 @@ func (uc *ImageUsecase) CreateJob(ctx context.Context, p *CreateJobParams) (*Cre
 
 func (uc *ImageUsecase) Scale(ctx context.Context, p *ScaleParams) (*ImageResult, error) {
 	return uc.repo.Scale(ctx, p)
+}
+
+func (uc *ImageUsecase) Clip(ctx context.Context, p *ClipParams) (*ImageResult, error) {
+	return uc.repo.Clip(ctx, p)
 }

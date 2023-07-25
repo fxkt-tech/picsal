@@ -50,7 +50,7 @@ func (r *imageRepo) Scale(ctx context.Context, p *biz.ScaleParams) (*biz.ImageRe
 		return nil, err
 	}
 
-	// r.data.imgStore.Put(p.Jobid, nimg)
+	r.data.imgStore.Put(p.Jobid, nimg)
 
 	buf := &bytes.Buffer{}
 	err = image.Write(buf, nimg)
@@ -69,13 +69,13 @@ func (r *imageRepo) Clip(ctx context.Context, p *biz.ClipParams) (*biz.ImageResu
 
 	nimg, err := filter.Clip(img, stdimage.Rectangle{
 		Min: stdimage.Pt(int(p.XOffset), int(p.YOffset)),
-		Max: stdimage.Point{},
+		Max: stdimage.Point{int(p.XOffset + p.Width), int(p.YOffset + p.Height)},
 	})
 	if err != nil {
 		return nil, err
 	}
 
-	// r.data.imgStore.Put(p.Jobid, nimg)
+	r.data.imgStore.Put(p.Jobid, nimg)
 
 	buf := &bytes.Buffer{}
 	err = image.Write(buf, nimg)
@@ -85,3 +85,5 @@ func (r *imageRepo) Clip(ctx context.Context, p *biz.ClipParams) (*biz.ImageResu
 
 	return &biz.ImageResult{ImageBytes: buf.Bytes()}, nil
 }
+
+// func (r *imageRepo) dealHandle(ctx context.Context, )

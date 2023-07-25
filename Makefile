@@ -68,7 +68,7 @@ tools:
 	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest
 	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-errors/v2@latest
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
-	go install entgo.io/ent/cmd/ent@v0.11.0
+	go install entgo.io/ent/cmd/ent@v0.12.3
 	go install github.com/bufbuild/buf/cmd/buf@v1.13.1
 
 # *** clean ***
